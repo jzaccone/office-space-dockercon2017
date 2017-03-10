@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+  database:
+    build:
+      context: ./registration-database
+    image: registration-database
+    # set default mysql root password, change as needed
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    # Expose port 3306 to host. Not for the application but
+    # handy to inspect the database from the host machine.
+    ports:
+      - "3306:3306" 
+    restart: always
+
+  webserver:
+    build: 
+      context: ./app
+    image: mysql-app
+    links:
+      - database:registration-database
+    ports:
+      - "8080:8080" 
+    restart: always  
+    command: ["./wait-for-it.sh", "database:3306", "--", "java", "-jar", "app.jar"]
+
+  transaction-generator:
+    build:
+      context: ./transaction-generator
+    image: transaction-generator
+    restart: always
+
