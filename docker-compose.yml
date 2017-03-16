@@ -26,6 +26,15 @@ services:
     restart: always  
     command: ["./wait-for-it.sh", "database:3306", "--", "java", "-jar", "app.jar"]
 
+  result:
+    build: ./result
+    command: nodemon --debug server.js
+    volumes:
+      - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858"
+
   transaction-generator:
     build:
       context: ./transaction-generator
