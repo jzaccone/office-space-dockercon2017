@@ -6,4 +6,11 @@ The app consists of a Java 8 / Spring Boot webserver that contains one method /c
 
 Transactions are simulated through the TransactionGenerator python app.
 
+How to run:
+```sh
+# git clone first
+docker-compose up
+# Open localhost:3001 in browser
+``` 
+
 ![Architecture Diagram](architecture.png)
