@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker ps -a | tail -3 | awk '{print $1}' | xargs docker rm -f 
-cd app
+docker ps -a | tail -4 | awk '{print $1}' | xargs docker rm -f 
+cd compute-interest-api
 mvn clean install
 cd ..
 docker-compose build

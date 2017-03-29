@@ -14,7 +14,7 @@ body{
   transition: all 1s linear;
 }
 
-#result{
+#accountSummary{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -27,6 +27,6 @@ body{
   font-size: 4em;
 }
 
-#accountSummary{
+#accountHeader{
   font-size: 2em;
 }

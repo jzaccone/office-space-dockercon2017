@@ -1,6 +1,4 @@
-package netgloo.models;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package officespace.models;
 
 public class Transaction {
 

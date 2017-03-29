@@ -16,6 +16,6 @@ while True:
 	print "Computing interest for transaction with amount: " + str(transactionAmount) + " and interestRate: " + str(interestRate)
 	transaction = {'amount': str(transactionAmount), 'interestRate': str(interestRate)}
 	headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-	response = requests.post("http://webserver:8080/computeinterest", data=json.dumps(transaction), headers=headers)	
+	response = requests.post("http://compute-interest-api:8080/computeinterest", data=json.dumps(transaction), headers=headers)	
 	print response.text
 	time.sleep(1)

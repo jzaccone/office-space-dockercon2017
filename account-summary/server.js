@@ -30,10 +30,10 @@ async.retry({
     function(callback) {
 
         var client = mysql.createConnection({
-            host: "database",
-            user: "gordon",
+            host: "account-database",
+            user: "michaelbolton",
             password: "password",
-            database: "dockercon2035"
+            database: "dockercon2017"
         });
 
         console.log('Connecting')
@@ -50,11 +50,11 @@ async.retry({
             return console.err("Giving up");
         }
         console.log("Connected to db");
-        getVotes(client);
+        getAccount(client);
     }
 );
 
-function getVotes(client) {
+function getAccount(client) {
 
     console.log('Querying')
     var queryText = 'SELECT * FROM account WHERE id=12345'
@@ -63,27 +63,12 @@ function getVotes(client) {
         if (error) {
             console.log(error)
         } else {
-
-            console.log("JZJZ result is" + JSON.stringify(result))
             io.sockets.emit("account", JSON.stringify(result[0]))
         }
 
-    setTimeout(function() {getVotes(client) }, 1000);
+    setTimeout(function() {getAccount(client) }, 1000);
     });
 
-}
-
-function getBalanceResult(result) {
-    var votes = {
-        a: 0,
-        b: 0
-    };
-
-    result.rows.forEach(function(row) {
-        votes[row.vote] = parseInt(row.count);
-    });
-
-    return votes;
 }
 
 app.use(cookieParser());

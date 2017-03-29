@@ -2,10 +2,10 @@ version: "3"
 
 services:
 
-  database:
+  account-database:
     build:
-      context: ./registration-database
-    image: registration-database
+      context: ./account-database
+    image: account-database
     # set default mysql root password, change as needed
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -15,22 +15,20 @@ services:
       - "3306:3306" 
     restart: always
 
-  webserver:
+  compute-interest-api:
     build: 
-      context: ./app
+      context: ./compute-interest-api
     image: mysql-app
-    links:
-      - database:registration-database
     ports:
       - "8080:8080" 
     restart: always  
-    command: ["./wait-for-it.sh", "database:3306", "--", "java", "-jar", "app.jar"]
+    command: ["./wait-for-it.sh", "account-database:3306", "--", "java", "-jar", "app.jar"]
 
-  result:
-    build: ./result
+  account-summary:
+    build: ./account-summary
     command: nodemon --debug server.js
     volumes:
-      - ./result:/app
+      - ./account-summary:/app
     ports:
       - "5001:80"
       - "5858:5858"
