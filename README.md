@@ -1,3 +1,6 @@
+Office Space "Stealing Rounded Interest"
+=========
+
 Getting started
 ---------------
 
@@ -9,6 +12,8 @@ docker-compose up
 ```
 The account summary will be running at [http://localhost:5001](http://localhost:5001).
 
+About the app
+---------------
 This app mimicks the fictitious app idea from Michael Bolton in the movie "Office Space".
 
 The app takes advantage of a financial program that computes interest for transactions by diverting fractions of a cent that are usually rounded off into a seperate bank account.
@@ -17,11 +22,6 @@ The app consists of a Java 8 / Spring Boot webserver that contains one method /c
 
 Transactions are simulated through the TransactionGenerator python app.
 
-How to run:
-```sh
-# git clone first
-docker-compose up
-# Open localhost:3001 in browser
-``` 
-
+Architecture
+---------------
 ![Architecture Diagram](architecture.png)
