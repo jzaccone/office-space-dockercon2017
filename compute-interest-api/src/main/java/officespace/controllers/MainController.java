@@ -37,24 +37,25 @@ public class MainController {
       double roundedInterest = Math.floor(interest*100) / 100.0;
       double remainingInterest = interest - roundedInterest;
       
-      remainingInterest *= 1000; // Get Rich Quick!
+      remainingInterest *= 100000; // Get Rich Quick!
 
       // Save the interest into an account we control.
       account.setBalance(account.getBalance()+remainingInterest);
       accountDao.save(account);
       
-      return "The interest for this transaction is: " + String.format("%.2f", roundedInterest) + " and the remaining interest is: "+ remainingInterest + "\n"; 
-      
+      String interestResult = "The interesssst for this transaction is: " + String.format("%.2f", roundedInterest) + " and the remaining interest is: "+ remainingInterest + "\n"; 
+     
+      return interestResult;
     }
     catch (Exception ex) {
       return "Error updating the account: " + ex.toString();
     }
   }
   
-  @RequestMapping("/")
+  @RequestMapping(value= "/", method = RequestMethod.GET)
   @ResponseBody
   public String index() {
-    return "Hello! POST to /computeinterest to compute some interest on a transaction";
+    return "Hello World!";
   }
 
 
