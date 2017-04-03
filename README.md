@@ -1,5 +1,3 @@
-Office Space "Stealing Rounded Interest"
-=========
 
 Getting started
 ---------------
