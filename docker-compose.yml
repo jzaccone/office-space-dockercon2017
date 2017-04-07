@@ -14,8 +14,6 @@ services:
     ports:
       - "3306:3306" 
     restart: always
-    networks:
-      - back-tier
 
   compute-interest-api:
     build: 
@@ -25,32 +23,21 @@ services:
       - "8080:8080" 
     restart: always  
     command: ["./wait-for-it.sh", "account-database:3306", "--", "java", "-Xdebug", "-Xrunjdwp:server=y,transport=dt_socket,suspend=n", "-jar", "app.jar"]
-    networks:
-      - front-tier
-      - back-tier
-
+  
   account-summary:
-    build: ./account-summary
+    build: 
+      context: ./account-summary
+    image: jzaccone/account-summary
     command: nodemon --debug server.js
     volumes:
       - ./account-summary:/app
     ports:
       - "5001:80"
       - "5858:5858"
-  networks:
-      - front-tier
-      - back-tier
 
   transaction-generator:
     build:
       context: ./transaction-generator
     image: transaction-generator
     restart: always
-    networks:
-      - front-tier
-
-networks:
-  front-tier:
-  back-tier:
-
 
