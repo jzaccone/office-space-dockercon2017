@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+
+  account-database:
+    image: jzaccone/account-database
+    # set default mysql root password, change as needed
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  compute-interest-api:
+    image: jzaccone/compute-interest-api
+    ports:
+      - "8080:8080" 
+    command: ["./wait-for-it.sh", "account-database:3306", "--", "java", "-jar", "app.jar"]
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  account-summary:
+    image: jzaccone/account-summary
+    ports:
+      - "5001:80"
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  transaction-generator:
+    image: jzaccone/transaction-generator
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
