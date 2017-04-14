@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk
 WORKDIR /app
 ADD wait-for-it.sh wait-for-it.sh
 EXPOSE 8080
