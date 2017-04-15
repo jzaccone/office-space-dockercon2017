@@ -3,9 +3,9 @@ version: "3"
 services:
 
   account-database:
+    image: jzaccone/account-database
     build:
       context: ./account-database
-    image: account-database
     # set default mysql root password, change as needed
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -16,18 +16,20 @@ services:
     restart: always
 
   compute-interest-api:
+    image: jzaccone/compute-interest-api
     build: 
       context: ./compute-interest-api
-    image: compute-interest-api
     ports:
       - "8080:8080" 
     restart: always  
-    command: ["./wait-for-it.sh", "account-database:3306", "--", "java", "-Xdebug", "-Xrunjdwp:server=y,transport=dt_socket,suspend=n", "-jar", "app.jar"]
+    command: ["java", "-Xdebug", "-Xrunjdwp:server=y,transport=dt_socket,suspend=n", "-jar", "app.jar"]
+    depends_on:
+      - "account-database"
   
   account-summary:
+    image: jzaccone/account-summary
     build: 
       context: ./account-summary
-    image: jzaccone/account-summary
     command: nodemon --debug server.js
     volumes:
       - ./account-summary:/app
@@ -36,8 +38,8 @@ services:
       - "5858:5858"
 
   transaction-generator:
+    image: jzaccone/transaction-generator
     build:
       context: ./transaction-generator
-    image: transaction-generator
     restart: always
 
