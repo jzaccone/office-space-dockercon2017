@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+  compute-interest-api:
+    command: ["java", "-Xdebug", "-Xrunjdwp:server=y,transport=dt_socket,suspend=n", "-jar", "app.jar"]
+    depends_on:
+      - "account-database"
+  
+  account-summary:
+    command: nodemon --debug server.js
+    volumes:
+      - ./account-summary:/app
+    ports:
+      - "5858:5858"

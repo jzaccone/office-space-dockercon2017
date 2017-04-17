@@ -22,7 +22,6 @@ services:
     ports:
       - "8080:8080" 
     restart: always  
-    command: ["java", "-Xdebug", "-Xrunjdwp:server=y,transport=dt_socket,suspend=n", "-jar", "app.jar"]
     depends_on:
       - "account-database"
   
@@ -30,12 +29,8 @@ services:
     image: jzaccone/account-summary
     build: 
       context: ./account-summary
-    command: nodemon --debug server.js
-    volumes:
-      - ./account-summary:/app
     ports:
       - "5001:80"
-      - "5858:5858"
 
   transaction-generator:
     image: jzaccone/transaction-generator
