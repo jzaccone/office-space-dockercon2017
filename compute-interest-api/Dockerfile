@@ -1,8 +1,7 @@
-FROM openjdk:8-jdk
+FROM maven:3.3.9-jdk-8-alpine
+COPY . /app
 WORKDIR /app
-ADD ./target/*.jar app.jar
-EXPOSE 8080
+RUN mvn package
 CMD java -jar app.jar
-
 
 
