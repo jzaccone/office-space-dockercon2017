@@ -5,6 +5,8 @@ services:
   account-api:
     build: 
       context: ./compute-interest-api
-
+    environment:
+      DATABASE_URL: http//account-database
+      
   account-database:
     image: jzaccone/account-database
