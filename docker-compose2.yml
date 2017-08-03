@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+
+  account-api:
+    build: 
+      context: ./compute-interest-api
+
+  account-database:
+    image: jzaccone/account-database
