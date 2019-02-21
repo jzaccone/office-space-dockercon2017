@@ -4,19 +4,6 @@ Getting started
 
 Download [Docker](https://www.docker.com/products/overview). If you are on Mac or Windows, [Docker Compose](https://docs.docker.com/compose) will be automatically installed. On Linux, make sure you have the latest version of [Compose](https://docs.docker.com/compose/install/).
 
-Compile the Java project
-```
-cd compute-interest-api
-mvn package
-cd ..
-```
-OR use the multi-stage build Dockerfile (Prereq- Edge Release: 17.04.0)
-```
-cd compute-interest-api
-mv Dockerfile_multistage Dockerfile
-cd ..
-```
-
 Run at the top level:
 ```
 docker-compose up
