@@ -20,8 +20,8 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    depends_on:
-      - "account-database"
+    environment:
+      - MYSQL_DB_PORT=3636
 
   account-summary:
     image: jzaccone/account-summary
